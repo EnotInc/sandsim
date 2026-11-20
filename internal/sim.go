@@ -2,75 +2,7 @@ package internal
 
 import (
 	"math/rand/v2"
-	"os"
-	"time"
-
-	"golang.org/x/term"
 )
-
-type Environment struct {
-	// term window size
-	w, h int
-
-	// NOTE: for now this is fine:
-	grid  []piece
-	moved map[int]bool
-
-	// additional terminal data
-	state *term.State
-	fdin  int
-
-	spawn int
-}
-
-func Init() *Environment {
-	fdin := int(os.Stdin.Fd())
-	fdout := int(os.Stdout.Fd())
-
-	state, err := term.MakeRaw(fdin)
-	if err != nil {
-		// TODO: error message
-		panic(err)
-	}
-
-	w, h, err := term.GetSize(fdout)
-	if err != nil {
-		// TODO: error message
-		panic(err)
-	}
-
-	h -= 1
-
-	_empty := make([]piece, w*h)
-	for i := range w * h {
-		_empty[i] = empty
-	}
-
-	return &Environment{
-		w: w,
-		h: h,
-
-		grid:  _empty,
-		moved: make(map[int]bool),
-
-		state: state,
-		fdin:  fdin,
-
-		spawn: 0,
-	}
-}
-
-func (env *Environment) Run() {
-	ticker := time.NewTicker(5 * time.Millisecond)
-	defer ticker.Stop()
-
-	for range ticker.C {
-
-		env.sim()
-		env.render()
-	}
-
-}
 
 func (env *Environment) sim() {
 	change := rand.IntN(100)
