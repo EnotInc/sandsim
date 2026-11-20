@@ -9,22 +9,12 @@ import (
 )
 
 func (env *Environment) beginRender() {
-	ticker := time.NewTicker(5 * time.Millisecond)
+	ticker := time.NewTicker(time.Duration(env.rate) * time.Millisecond)
 	defer ticker.Stop()
-	fmt.Print(ascii.SaveTerm)
-	fmt.Print(ascii.HideCursor)
 
 	for range ticker.C {
 		env.render()
 	}
-}
-
-func (env *Environment) endRender() {
-	fmt.Print(
-		ascii.ClearAll,
-		ascii.Reset,
-		ascii.RestoreTerm,
-		ascii.ShowCursor)
 }
 
 func (env *Environment) render() {

@@ -1,5 +1,7 @@
 package simulation
 
+const NotFill = -1
+
 type piece int
 
 const (

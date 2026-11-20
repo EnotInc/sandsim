@@ -1,12 +1,11 @@
 package simulation
 
 import (
-	"math/rand/v2"
 	"time"
 )
 
 func (env *Environment) beginSim() {
-	ticker := time.NewTicker(5 * time.Millisecond)
+	ticker := time.NewTicker(time.Duration(env.rate) * time.Millisecond)
 	defer ticker.Stop()
 
 	for range ticker.C {
@@ -15,21 +14,16 @@ func (env *Environment) beginSim() {
 }
 
 func (env *Environment) sim() {
-	change := rand.IntN(100)
-
-	// just a magic number, to not change sand spanw point too often
-	if change >= 97 {
-		new := rand.IntN(env.w)
-		env.spawn = new
+	if env.spawn != NotFill {
+		env.grid[env.spawn] = sand
 	}
-
-	// spawning a new sand piece
-	env.grid[env.spawn] = sand
 
 	env.moved = map[int]bool{}
 	size := env.w * env.h
 
-	for i, p := range env.grid {
+	for i := env.w*env.h - 1; i > 0; i -= 1 {
+		p := env.grid[i]
+
 		below := i + env.w
 
 		switch p {
