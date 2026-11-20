@@ -9,7 +9,9 @@ func (env *Environment) beginSim() {
 	defer ticker.Stop()
 
 	for range ticker.C {
+		env.mu.Lock()
 		env.sim()
+		env.mu.Unlock()
 	}
 }
 

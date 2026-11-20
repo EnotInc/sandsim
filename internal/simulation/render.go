@@ -23,7 +23,12 @@ func (env *Environment) render() {
 	output.WriteString(ascii.ClearAll)
 	output.WriteString(ascii.Reset)
 
-	for i, p := range env.grid {
+	env.mu.Lock()
+	clone := make([]piece, env.w*env.h)
+	copy(clone, env.grid)
+	env.mu.Unlock()
+
+	for i, p := range clone {
 		if i%env.w == 0 {
 			output.WriteString("\n\r")
 		}

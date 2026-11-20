@@ -3,6 +3,7 @@ package simulation
 import (
 	"fmt"
 	"os"
+	"sync"
 
 	"github.com/enotinc/sandsim/internal/ascii"
 	"golang.org/x/term"
@@ -26,6 +27,7 @@ type Environment struct {
 	rate int
 
 	quit chan bool
+	mu   sync.RWMutex
 }
 
 func setup() {
@@ -100,7 +102,7 @@ func (env *Environment) exit() {
 func (env *Environment) Run() {
 	go env.beginSim()
 	go env.beginRender()
-	go env.readInput()
+	go env.beginReadInput()
 
 	<-env.quit
 	env.exit()
