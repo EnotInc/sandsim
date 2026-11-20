@@ -1,0 +1,21 @@
+package internal
+
+type piece int
+
+const (
+	// TODO: extend...
+	_ piece = iota
+	empty
+	sand
+)
+
+func (p *piece) String() string {
+	switch *p {
+	case empty:
+		return " "
+	case sand:
+		return "#"
+	default:
+		return " "
+	}
+}
