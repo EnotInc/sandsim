@@ -2,7 +2,17 @@ package internal
 
 import (
 	"math/rand/v2"
+	"time"
 )
+
+func (env *Environment) beginSim() {
+	ticker := time.NewTicker(5 * time.Millisecond)
+	defer ticker.Stop()
+
+	for range ticker.C {
+		env.sim()
+	}
+}
 
 func (env *Environment) sim() {
 	change := rand.IntN(100)

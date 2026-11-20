@@ -3,16 +3,26 @@ package internal
 import (
 	"bytes"
 	"fmt"
+	"time"
 )
 
 const (
 	reset    = "\033[H"
-	clearall = "\033[2J\033[3J"
+	clearAll = "\033[2J\033[3J"
 )
+
+func (env *Environment) beginRender() {
+	ticker := time.NewTicker(5 * time.Millisecond)
+	defer ticker.Stop()
+
+	for range ticker.C {
+		env.render()
+	}
+}
 
 func (env *Environment) render() {
 	var output bytes.Buffer
-	output.WriteString(clearall)
+	output.WriteString(clearAll)
 	output.WriteString(reset)
 
 	for i, p := range env.grid {

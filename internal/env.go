@@ -1,8 +1,8 @@
 package internal
 
 import (
+	"fmt"
 	"os"
-	"time"
 
 	"golang.org/x/term"
 )
@@ -19,6 +19,8 @@ type Environment struct {
 	fdin  int
 
 	spawn int
+
+	quit chan bool
 }
 
 func Init() *Environment {
@@ -52,18 +54,22 @@ func Init() *Environment {
 		state: state,
 		fdin:  fdin,
 
+		quit:  make(chan bool),
 		spawn: 0,
 	}
 }
 
+func (env *Environment) exit() {
+	term.Restore(env.fdin, env.state)
+	fmt.Print(clearAll, reset)
+	os.Exit(0)
+}
+
 func (env *Environment) Run() {
-	ticker := time.NewTicker(5 * time.Millisecond)
-	defer ticker.Stop()
+	go env.beginSim()
+	go env.beginRender()
+	go env.readInput()
 
-	for range ticker.C {
-
-		env.sim()
-		env.render()
-	}
-
+	<-env.quit
+	env.exit()
 }
