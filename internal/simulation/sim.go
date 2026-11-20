@@ -21,7 +21,7 @@ func (env *Environment) sim() {
 	env.moved = map[int]bool{}
 	size := env.w * env.h
 
-	for i := env.w*env.h - 1; i > 0; i -= 1 {
+	for i := env.w*env.h - 1; i >= 0; i -= 1 {
 		p := env.grid[i]
 
 		below := i + env.w
