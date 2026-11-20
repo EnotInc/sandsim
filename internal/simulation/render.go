@@ -3,6 +3,7 @@ package simulation
 import (
 	"bytes"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/enotinc/sandsim/internal/ascii"
@@ -30,5 +31,13 @@ func (env *Environment) render() {
 		output.WriteString(p.String())
 	}
 
+	output.WriteString(env.header())
 	fmt.Print(output.String())
+}
+
+func (env *Environment) header() string {
+	title := " press 'q' to quit "
+	border := strings.Repeat("=", (env.w-len(title))/2)
+
+	return fmt.Sprintf("%s%s%s", border, title, border)
 }

@@ -29,9 +29,16 @@ func (env *Environment) readInput() {
 				continue
 			}
 
+			// fixing mouse ofset in terminal
+			// for some reason starting point is 1:1
+			if x > 0 && y > 0 { // guard just in case
+				x -= 1
+				y -= 1
+			}
+
 			switch releaseChar {
 			case 'm':
-				env.spawn = -1
+				env.spawn = NotFill
 			default:
 				env.spawn = x + y*env.w
 			}

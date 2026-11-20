@@ -16,8 +16,8 @@ func (p *piece) String() string {
 	case empty:
 		return " "
 	case sand:
-		return "#"
+		return "\033[33m@\033[0m"
 	default:
-		return " "
+		return ""
 	}
 }
