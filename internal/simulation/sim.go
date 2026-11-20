@@ -1,4 +1,4 @@
-package internal
+package simulation
 
 import (
 	"math/rand/v2"

@@ -1,7 +1,6 @@
-package internal
+package simulation
 
 import (
-	"fmt"
 	"os"
 
 	"golang.org/x/term"
@@ -61,7 +60,7 @@ func Init() *Environment {
 
 func (env *Environment) exit() {
 	term.Restore(env.fdin, env.state)
-	fmt.Print(clearAll, reset)
+	env.endRender()
 	os.Exit(0)
 }
 

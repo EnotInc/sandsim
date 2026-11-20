@@ -1,8 +1,8 @@
 package main
 
-import "github.com/enotinc/sandsim/internal"
+import "github.com/enotinc/sandsim/internal/simulation"
 
 func main() {
-	env := internal.Init()
+	env := simulation.Init()
 	env.Run()
 }
