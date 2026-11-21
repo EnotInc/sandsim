@@ -20,7 +20,6 @@ func (env *Environment) beginRender() {
 
 func (env *Environment) render() {
 	var output bytes.Buffer
-	output.WriteString(ascii.ClearAll)
 	output.WriteString(ascii.Reset)
 
 	env.mu.Lock()

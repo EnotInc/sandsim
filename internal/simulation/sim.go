@@ -20,7 +20,6 @@ func (env *Environment) sim() {
 		env.grid[env.spawn] = sand
 	}
 
-	env.moved = map[int]bool{}
 	size := env.w * env.h
 
 	for i := env.w*env.h - 1; i >= 0; i -= 1 {
@@ -35,14 +34,9 @@ func (env *Environment) sim() {
 				continue
 			}
 
-			if env.moved[i] { // ignoring if this piece alrady was moved
-				continue
-			}
-
 			if env.grid[below] == empty {
 				env.grid[i] = empty
 				env.grid[below] = sand
-				env.moved[below] = true
 				continue
 			}
 
@@ -50,7 +44,6 @@ func (env *Environment) sim() {
 			if below%env.w != 0 && env.grid[below-1] == empty {
 				env.grid[i] = empty
 				env.grid[below-1] = sand
-				env.moved[below-1] = true
 				continue
 			}
 
@@ -58,7 +51,6 @@ func (env *Environment) sim() {
 			if below%env.w != env.w-1 && env.grid[below+1] == empty {
 				env.grid[i] = empty
 				env.grid[below+1] = sand
-				env.moved[below+1] = true
 				continue
 			}
 

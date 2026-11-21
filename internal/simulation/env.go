@@ -13,8 +13,7 @@ type Environment struct {
 	// term window size
 	w, h int
 
-	grid  []piece
-	moved map[int]bool
+	grid []piece
 
 	// additional terminal data
 	state *term.State
@@ -77,8 +76,7 @@ func Init() *Environment {
 		w: w,
 		h: h,
 
-		grid:  _empty,
-		moved: make(map[int]bool),
+		grid: _empty,
 
 		state: state,
 		fdin:  fdin,
