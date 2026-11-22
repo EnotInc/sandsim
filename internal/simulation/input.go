@@ -27,8 +27,7 @@ func (env *Environment) readInput(buffer []byte) {
 		case '\t':
 			env.nextPiece()
 		case 'c':
-			// TODO:
-			// env.clear()
+			env.fillEmpty()
 		}
 
 		return

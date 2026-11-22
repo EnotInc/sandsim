@@ -64,19 +64,9 @@ func Init() *Environment {
 		panic(err)
 	}
 
-	size := w * h
-
-	_empty := make([]piece, size)
-	for i := range size {
-		_empty[i] = empty
-	}
-
-	setup()
-	return &Environment{
+	env := &Environment{
 		w: w,
 		h: h,
-
-		grid: _empty,
 
 		state: state,
 		fdin:  fdin,
@@ -90,6 +80,22 @@ func Init() *Environment {
 
 		quit: make(chan bool),
 	}
+
+	setup()
+
+	env.fillEmpty()
+
+	return env
+}
+
+func (env *Environment) fillEmpty() {
+	size := env.w * env.h
+	_empty := make([]piece, size)
+	for i := range size {
+		_empty[i] = empty
+	}
+
+	env.grid = _empty
 }
 
 func (env *Environment) exit() {

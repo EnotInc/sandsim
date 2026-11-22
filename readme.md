@@ -6,4 +6,6 @@ Simple sand simulation in go
 
 Run with this command: `go run cmd/sandsim/main.go`
 
-To quit simulation press `q`
+List of commands:
+- `q` - quit
+- `[TAB]` - change swapning piece type
