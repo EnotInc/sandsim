@@ -20,8 +20,17 @@ func (env *Environment) readInput(buffer []byte) {
 
 	input := buffer[:n]
 
-	if n == 1 && input[0] == 'q' {
-		env.quit <- true
+	if n == 1 {
+		switch input[0] {
+		case 'q':
+			env.quit <- true
+		case '\t':
+			env.nextPiece()
+		case 'c':
+			// TODO:
+			// env.clear()
+		}
+
 		return
 	}
 

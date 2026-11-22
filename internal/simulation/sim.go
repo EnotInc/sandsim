@@ -17,7 +17,7 @@ func (env *Environment) beginSim() {
 
 func (env *Environment) sim() {
 	if env.spawn != NotFill {
-		env.grid[env.spawn] = sand
+		env.grid[env.spawn] = env.spaw_t
 	}
 
 	size := env.w * env.h

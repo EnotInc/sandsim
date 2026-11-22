@@ -32,16 +32,18 @@ func (env *Environment) render() {
 			output.WriteString("\n\r")
 		}
 
-		output.WriteString(p.String())
+		output.WriteString(p.Show())
 	}
 
-	output.WriteString(env.header())
+	output.WriteString(env.bar())
 	fmt.Print(output.String())
 }
 
-func (env *Environment) header() string {
-	title := " press 'q' to quit "
-	border := strings.Repeat("=", (env.w-len(title))/2)
+func (env *Environment) bar() string {
+	info := fmt.Sprintf("===== [q] quit ===== [TAB] - change type [%s] ", env.spaw_t.String())
+	controls := ""
 
-	return fmt.Sprintf("%s%s%s", border, title, border)
+	border := strings.Repeat("=", max(env.w-len(info)-len(controls), 0))
+
+	return fmt.Sprintf("%s%s%s", info, controls, border)
 }

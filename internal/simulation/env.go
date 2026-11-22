@@ -20,7 +20,8 @@ type Environment struct {
 	fdin  int
 
 	// absolute position. Used to spawn a new piece on it
-	spawn int
+	spawn  int
+	spaw_t piece
 
 	// simulation update rate
 	rate int
@@ -85,7 +86,8 @@ func Init() *Environment {
 		// later this could be moved to some sort of config
 		rate: 15,
 
-		spawn: NotFill,
+		spawn:  NotFill,
+		spaw_t: sand,
 
 		quit: make(chan bool),
 	}
