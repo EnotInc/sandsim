@@ -30,7 +30,12 @@ func (env *Environment) sim() {
 		switch p {
 		case sand:
 
-			if below >= size { // out of bounds
+			if below >= size-env.w { // out of bounds
+				continue
+			}
+
+			// sand will say on solid blocks due to this if statement
+			if env.grid[below] == solid {
 				continue
 			}
 
