@@ -64,11 +64,10 @@ func Init() *Environment {
 		panic(err)
 	}
 
-	// leaving one line for header
-	h -= 1
+	size := w * h
 
-	_empty := make([]piece, w*h)
-	for i := range w * h {
+	_empty := make([]piece, size)
+	for i := range size {
 		_empty[i] = empty
 	}
 

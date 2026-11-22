@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/enotinc/sandsim/internal/ascii"
+	"github.com/enotinc/sandsim/internal/render"
 )
 
 func (env *Environment) beginRender() {
@@ -27,12 +28,19 @@ func (env *Environment) render() {
 	copy(clone, env.grid)
 	env.mu.Unlock()
 
+	lines := []string{}
+	var line bytes.Buffer
 	for i, p := range clone {
 		if i%env.w == 0 {
-			output.WriteString("\n\r")
+			lines = append(lines, line.String())
+			line.Reset()
 		}
 
-		output.WriteString(p.Show())
+		line.WriteString(p.Show())
+	}
+
+	for _, l := range lines {
+		output.WriteString(render.Render(l))
 	}
 
 	output.WriteString(env.bar())
