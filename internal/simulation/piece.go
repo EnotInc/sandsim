@@ -10,6 +10,7 @@ const (
 	empty
 	sand
 	solid
+	eraser
 
 	pieceAmount
 )
@@ -37,15 +38,17 @@ func (p *piece) String() string {
 		return "sand"
 	case solid:
 		return "solid"
+	case eraser:
+		return "eraser"
 	default:
 		return ""
 	}
 }
 
 func (env *Environment) nextPiece() {
-	env.spaw_t += 1
+	env.spawn_t += 1
 
-	if env.spaw_t == pieceAmount {
-		env.spaw_t = sand
+	if env.spawn_t == pieceAmount {
+		env.spawn_t = sand
 	}
 }

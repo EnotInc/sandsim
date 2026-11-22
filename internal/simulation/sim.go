@@ -17,7 +17,14 @@ func (env *Environment) beginSim() {
 
 func (env *Environment) sim() {
 	if env.spawn != NotFill {
-		env.grid[env.spawn] = env.spaw_t
+		switch env.spawn_t {
+		case eraser:
+			env.grid[env.spawn] = empty
+		default:
+			if env.grid[env.spawn] == empty {
+				env.grid[env.spawn] = env.spawn_t
+			}
+		}
 	}
 
 	size := env.w * env.h

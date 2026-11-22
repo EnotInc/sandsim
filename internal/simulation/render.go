@@ -48,7 +48,7 @@ func (env *Environment) render() {
 }
 
 func (env *Environment) bar() string {
-	info := fmt.Sprintf("===== [q] quit ===== [TAB] - change type [%s] ", env.spaw_t.String())
+	info := fmt.Sprintf("===== [q] quit ===== [TAB] - change type [%s] ", env.spawn_t.String())
 	controls := ""
 
 	border := strings.Repeat("=", max(env.w-len(info)-len(controls), 0))
