@@ -8,4 +8,4 @@ Run with this command: `go run cmd/sandsim/main.go`
 
 List of commands:
 - `q` - quit
-- `[TAB]` - change swapning piece type
+- `[TAB]` - change spawning piece type
