@@ -25,9 +25,13 @@ func (env *Environment) readInput(buffer []byte) {
 		case 'q':
 			env.quit <- true
 		case '\t':
+			env.mu.Lock()
 			env.nextPiece()
+			env.mu.Unlock()
 		case 'c':
+			env.mu.Lock()
 			env.fillEmpty()
+			env.mu.Unlock()
 		}
 
 		return
@@ -44,9 +48,8 @@ func (env *Environment) readInput(buffer []byte) {
 
 		// fixing mouse ofset in terminal
 		// for some reason starting point is 1:1
-		if x > 0 && y > 0 { // guard just in case
+		if x > 0 { // guard just in case
 			x -= 1
-			y -= 1
 		}
 
 		env.mu.Lock()

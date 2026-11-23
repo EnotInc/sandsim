@@ -29,7 +29,7 @@ func (env *Environment) sim() {
 
 	size := env.w * env.h
 
-	for i := env.w*env.h - 1; i >= 0; i -= 1 {
+	for i := size - 1; i >= 0; i -= 1 {
 		p := env.grid[i]
 
 		below := i + env.w
@@ -37,7 +37,7 @@ func (env *Environment) sim() {
 		switch p {
 		case sand:
 
-			if below >= size-env.w { // out of bounds
+			if below >= size { // out of bounds
 				continue
 			}
 

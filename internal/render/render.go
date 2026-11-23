@@ -20,7 +20,7 @@ func Render(line string) string {
 		paint(&out, line[start:pos])
 	}
 
-	out.WriteString("\n")
+	out.WriteString("\n\r")
 
 	return out.String()
 }

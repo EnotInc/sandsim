@@ -30,13 +30,14 @@ func (env *Environment) render() {
 
 	lines := []string{}
 	var line bytes.Buffer
+
 	for i, p := range clone {
-		if i%env.w == 0 {
+		line.WriteString(p.Show())
+
+		if (i+1)%env.w == 0 {
 			lines = append(lines, line.String())
 			line.Reset()
 		}
-
-		line.WriteString(p.Show())
 	}
 
 	for _, l := range lines {
